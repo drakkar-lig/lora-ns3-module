@@ -36,4 +36,4 @@ This software is licensed under the terms of the GNU GPLv2 - see the [LICENSE](L
 
 Developped initially by L. Tracy, A. Sacco, M. Watrous, P. Boyko.
 
-Successive contributions T. Hai and A. Duda.
+Successive contributions T. Thanh-Hai.

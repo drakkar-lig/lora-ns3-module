@@ -419,6 +419,22 @@ LoraNetDevice::SetAddress (Address address)
   m_mac->SetAddress (LoraAddress::ConvertFrom (address));
 }
 
+
+Address 
+LoraNetDevice::GetGWAddress () const
+{
+        return m_gwAddress;
+}
+
+
+void
+LoraNetDevice::SetGWAddress (Address gwAddress)
+{
+  m_gwAddress = gwAddress;
+}
+
+
+
 void
 LoraNetDevice::SetSleepMode (bool sleep)
 {

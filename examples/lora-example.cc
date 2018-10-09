@@ -26,8 +26,6 @@
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/mobility-module.h"
-#include "ns3/point-to-point-module.h"
-#include "ns3/wifi-module.h" 
 
 #include "ns3/lora-net-device.h"
 #include "ns3/lora-channel.h"
@@ -102,6 +100,8 @@ private:
   bool RxPacket (Ptr<NetDevice> dev, Ptr<const Packet> pkt, uint16_t mode, const Address &sender);
   void SendOnePacket (Ptr<LoraNetDevice> dev, uint32_t mode);
 
+  void SendOnePacket2GW (Ptr<LoraNetDevice> dev, uint32_t mode, Address &sender);
+
   uint32_t RanTxTime(uint32_t fMin, uint32_t fMax);
   uint32_t random_number(uint32_t min_num, uint32_t max_num);
 };
@@ -165,6 +165,15 @@ LoraExample::SendOnePacket (Ptr<LoraNetDevice> dev, uint32_t mode)
 {
   Ptr<Packet> pkt = Create<Packet> (13);
   dev->Send (pkt, dev->GetBroadcast (), mode);
+}
+
+
+void
+LoraExample::SendOnePacket2GW (Ptr<LoraNetDevice> dev, uint32_t mode, Address &sender)
+{
+  Ptr<Packet> pkt = Create<Packet> (13);
+  dev->Send (pkt, sender, mode);
+
 }
 
 
@@ -268,7 +277,7 @@ LoraExample::DoOneExample (Ptr<LoraPropModel> prop)
       {
          x = 50; y = 50; z = 50;
       }
-              
+      PtrDevice[i]->SetGWAddress(gw0->GetAddress());              
   }
 
 //Set gateway to receive packets from end devices node.
@@ -290,7 +299,9 @@ LoraExample::DoOneExample (Ptr<LoraPropModel> prop)
         s_transmitStartTime = RanTxTime(nTempStart,nTempEnd);
         PtrDevice[j]->SetChannelMode(mode[m]);
         PtrDevice[j]->SetTransmitStartTime(s_transmitStartTime);
-        Simulator::Schedule (Seconds(s_transmitStartTime), &LoraExample::SendOnePacket, this, PtrDevice[j], mode[m]);       
+        Simulator::Schedule (Seconds(s_transmitStartTime), &LoraExample::SendOnePacket2GW, this, PtrDevice[j],
+                                                                                   mode[m], PtrDevice[j]->GetGWAddress());
+      
         m += 1; 
         if (m > 2) { m = 0; }
      } 

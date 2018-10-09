@@ -136,6 +136,9 @@ public:
   bool SendCsma (Ptr<Packet> packet, const Address& dest, uint16_t protocolNumber);
   bool SendFromCsma (Ptr<Packet> packet, const Address& dest, uint16_t protocolNumber);
 
+  virtual Address GetGWAddress (void) const;
+  virtual void SetGWAddress (Address gwAddress);
+
 
   virtual void SetIfIndex (const uint32_t index);
   virtual uint32_t GetIfIndex (void) const;
@@ -322,6 +325,7 @@ private:
    */
 
   Address m_dest;  
+  Address  m_gwAddress;
   uint16_t m_protocolNumber;
 
 protected:

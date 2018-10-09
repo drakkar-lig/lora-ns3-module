@@ -53,7 +53,7 @@ private:
 
   bool RxPacket (Ptr<NetDevice> dev, Ptr<const Packet> pkt, uint16_t mode, const Address &sender);
   void SendOnePacket (Ptr<LoraNetDevice> dev, uint32_t mode);
-
+  void SendOnePacket2GW (Ptr<LoraNetDevice> dev, uint32_t mode, Address &sender);
 
 uint32_t RanTxTime(uint32_t fMin, uint32_t fMax);
 
@@ -82,6 +82,13 @@ LoraTestAca::SendOnePacket (Ptr<LoraNetDevice> dev, uint32_t mode)
   dev->Send (pkt, dev->GetBroadcast (), mode);
 }
 
+void
+LoraTestAca::SendOnePacket2GW (Ptr<LoraNetDevice> dev, uint32_t mode, Address &sender)
+{
+  Ptr<Packet> pkt = Create<Packet> (13);
+  dev->Send (pkt, sender, mode);
+
+}
 
 Ptr<LoraNetDevice>
 LoraTestAca::CreateNode (Vector pos, Ptr<LoraChannel> chan)
