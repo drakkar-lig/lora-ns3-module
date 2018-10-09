@@ -33,8 +33,3 @@ To run example of ns3 lora module, you run this statement:
 
 This software is licensed under the terms of the GNU GPLv2 - see the [LICENSE](LICENSE) file for details.
 
-## Contributors
-
-Developped initially by L. Tracy, A. Sacco, M. Watrous, P. Boyko.
-
-Successive contributions T. Thanh-Hai.
