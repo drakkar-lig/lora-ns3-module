@@ -125,14 +125,14 @@ LoraChannel::SetPropagationModel (Ptr<LoraPropModel> prop)
   m_prop = prop;
 }
 
-uint32_t
+std::size_t
 LoraChannel::GetNDevices () const
 {
   return m_devList.size ();
 }
 
 Ptr<NetDevice>
-LoraChannel::GetDevice (uint32_t i) const
+LoraChannel::GetDevice (std::size_t i) const
 {
   return m_devList[i].first;
 }
