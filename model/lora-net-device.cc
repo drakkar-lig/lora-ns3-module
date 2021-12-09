@@ -560,7 +560,7 @@ LoraNetDevice::TransmitCompleteEvent (void)
 
   NS_LOG_LOGIC ("Schedule TransmitReadyEvent in " << m_tInterframeGap.GetSeconds () << "sec");
 
-  Simulator::Schedule (Seconds(m_tInterframeGap), &LoraNetDevice::TransmitReadyEvent, this);
+  Simulator::Schedule (Seconds(m_tInterframeGap.GetSeconds()), &LoraNetDevice::TransmitReadyEvent, this);
 
 }
 
